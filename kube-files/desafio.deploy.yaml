@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: desafio
+  name: desafio
+  namespace: virt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: desafio
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: desafio
+    spec:
+      containers:
+      - image: imagem/desafio
+        name: desafio
+        imagePullPolicy: Never
+        env:
+        - name: NAME
+          valueFrom:
+           configMapKeyRef:
+             name: desafio-config
+             key: value
+#	  ports:
+#	  - containerPort: 4000
+#      restartPolicy: Never
+#        resources: 
+#          requests:
+#	     cpu: 50m
+#	     memory: 100Mi
+#	  limits:
+#	     cpu: 500m
+#	     memory: 256Mi
+
+#        - name: NAME
+#          value: Willard
+status: {}
